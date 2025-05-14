@@ -1,0 +1,62 @@
+[tool.poetry]
+name = "pycodex"
+version = "0.1.0"
+description = "Python code indexing and search server for Claude Desktop integration"
+authors = ["arash <arash.b.7@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "pycodex"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pydantic = "^2.5.2"
+fastmcp = "^2.3.3"
+sqlalchemy = "^2.0.23"
+gitignore-parser = "^0.1.6"
+astroid = "^3.3.10"
+typer = "^0.15.3"
+click = ">=8.0.0,<8.2.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+black = "^25.1.0"
+isort = "^5.12.0"
+mypy = "^1.7.1"
+ruff = "^0.11.9"
+shell = "^1.0.1"
+
+[tool.poetry.scripts]
+pycodex = "pycodex.cli:app"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.black]
+line-length = 110
+
+[tool.isort]
+profile = "black"
+line_length = 110
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+mypy_path = "stubs"
+
+[[tool.mypy.overrides]]
+module = "gitignore_parser.*"
+ignore_missing_imports = true
+
+[tool.ruff]
+fix = true
+force-exclude = true
+target-version = "py312"
+respect-gitignore = true
+lint.select = ["E", "W", "F", "B"]
+lint.ignore = ["E501"]
